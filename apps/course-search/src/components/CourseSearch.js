@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setQuery, filterCourses } from '../../store';
 
@@ -7,24 +6,22 @@ const CourseSearch = () => {
   const dispatch = useDispatch();
   const [query, setLocalQuery] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(setQuery(query));
+  const handleChange = (e) => {
+    const newQuery = e.target.value;
+    setLocalQuery(newQuery);
+    dispatch(setQuery(newQuery));
     dispatch(filterCourses());
   };
 
   return (
     <div>
-      <h1>Buscar Cursos component</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setLocalQuery(e.target.value)}
-          placeholder="Digite o nome do curso"
-        />
-        <button type="submit">Buscar</button>
-      </form>
+      <h1>Buscar Cursos</h1>
+      <input
+        type="text"
+        value={query}
+        onChange={handleChange}
+        placeholder="Digite o nome do curso"
+      />
     </div>
   );
 };
