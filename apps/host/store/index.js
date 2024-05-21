@@ -1,18 +1,9 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
-const initialCourses = [
-  { id: 1, name: 'Curso 1 host' },
-  { id: 2, name: 'Curso 2' },
-  { id: 3, name: 'Curso 3' },
-  { id: 4, name: 'aaaa' },
-  { id: 5, name: 'bbbb' },
-  { id: 6, name: 'cccc' },
-];
-
 const coursesSlice = createSlice({
   name: 'courses',
   initialState: {
-    list: initialCourses,
+    list: [],
     query: '',
   },
   reducers: {
@@ -20,18 +11,19 @@ const coursesSlice = createSlice({
       state.query = action.payload;
     },
     filterCourses: (state) => {
-      const { query } = state;
-      state.list = query
-        ? initialCourses.filter(course =>
+      const { query, list } = state;
+      state.filtered = query
+        ? list.filter(course =>
             course.name.toLowerCase().includes(query.toLowerCase())
           )
-        : initialCourses;
+        : list;
     },
     setCourses: (state, action) => {
       state.list = action.payload;
+      state.filtered = action.payload; // Inicializar a lista filtrada com todos os cursos
     },
     resetCourses: (state) => {
-      state.list = initialCourses;
+      state.filtered = state.list;
     }
   }
 });

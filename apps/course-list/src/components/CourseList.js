@@ -5,7 +5,8 @@ import axios from 'axios';
 
 const CourseList = () => {
   const dispatch = useDispatch();
-  const courses = useSelector(state => state.courses.list);
+  const courses = useSelector(state => state.courses.filtered);
+  const query = useSelector(state => state.courses.query);
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -19,6 +20,10 @@ const CourseList = () => {
 
     fetchCourses();
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(filterCourses());
+  }, [dispatch, query]);
 
   return (
     <div>
