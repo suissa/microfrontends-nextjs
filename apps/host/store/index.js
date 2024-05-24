@@ -14,7 +14,7 @@ const coursesSlice = createSlice({
       const { query, list } = state;
       state.filtered = query
         ? list.filter(course =>
-            course.name.toLowerCase().includes(query.toLowerCase())
+            course.title.toLowerCase().includes(query.toLowerCase())
           )
         : list;
     },

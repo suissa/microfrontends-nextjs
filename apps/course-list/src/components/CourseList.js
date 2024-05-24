@@ -13,6 +13,7 @@ const CourseList = () => {
       try {
         const response = await axios.get('http://localhost:5000/courses');
         dispatch(setCourses(response.data));
+        console.log("data: ", response.data);
       } catch (error) {
         console.error('Erro ao buscar cursos:', error);
       }
@@ -26,13 +27,17 @@ const CourseList = () => {
   }, [dispatch, query]);
 
   return (
-    <div>
-      <h1>Lista de Cursos</h1>
-      <ul>
-        {courses?.map(course => (
-          <li key={course.id}>{course.name}</li>
-        ))}
-      </ul>
+    <div className="course-container">
+      {courses?.map(course => (
+        <div key={course.id} className="course-card">
+          <h3>{course.title}</h3>
+          <p>Duração: {course.durationLabel}</p>
+          <p>Grau: {course.graduationLabel}</p>
+          <p>Modalidade: {course.modalityLabel}</p>
+          <button>Inscreva-se</button>
+          <a href="#">Sobre o Curso</a>
+        </div>
+      ))}
     </div>
   );
 };

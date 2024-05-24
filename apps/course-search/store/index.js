@@ -13,7 +13,7 @@ const coursesSlice = createSlice({
     filterCourses: (state) => {
       if (state.query) {
         state.list = state.list.filter(course =>
-          course.name.toLowerCase().includes(state.query.toLowerCase())
+          course.title.toLowerCase().includes(state.query.toLowerCase())
         );
       }
     },
