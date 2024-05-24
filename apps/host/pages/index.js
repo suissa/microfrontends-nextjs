@@ -16,7 +16,6 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Microfrontends Next.js</h1>
       <CourseSearch onSearch={handleSearchSubmit} />
       <CourseList />
     </div>
